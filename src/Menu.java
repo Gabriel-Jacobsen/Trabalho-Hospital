@@ -241,10 +241,10 @@ public class Menu {
 			menuAdicionarMedico.setVisible(true);
 		});
 		mostrarHistorico.addActionListener(e -> {
-			System.out.print(historico.exibirFila());
+			System.out.print(historico.exibirHistorico());
 			menuInicial.setVisible(false);
 			menuMostrarHistorico.setVisible(true);
-			listaHistorico.setText(historico.exibirFila());
+			listaHistorico.setText(historico.exibirHistorico());
 		});
 		
 		//Menu adicionar Paciente -------

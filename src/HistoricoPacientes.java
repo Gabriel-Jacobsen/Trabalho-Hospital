@@ -9,7 +9,7 @@ public class HistoricoPacientes {
 		historico.add(atend);
 	}
 	
-	public String exibirFila() {
+	public String exibirHistorico() {
 		String resultado = "";
 		for (int i =0; i< historico.size();i++) {
 			resultado = resultado + historico.get(i).toString() + "\n \n";
