@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Paciente extends Pessoa {
 	
 	private static int idMax=0;
@@ -31,8 +32,8 @@ public class Paciente extends Pessoa {
 		this.idPaciente = idPaciente;
 	}
 
-	public LocalDateTime getHoraChegada() {
-		return horaChegada;
+	public String getHoraChegada() {
+		return horaChegada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
 	}
 
 	public void setHoraChegada(LocalDateTime horaChegada) {
@@ -52,7 +53,7 @@ public class Paciente extends Pessoa {
 		builder.append("Paciente [idPaciente: ");
 		builder.append(idPaciente);
 		builder.append(", horaChegada: ");
-		builder.append(horaChegada);
+		builder.append(getHoraChegada());
 		builder.append(", classificacao: ");
 		builder.append(classificacao);
 		builder.append(super.toString());

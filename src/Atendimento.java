@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Atendimento {
 
@@ -28,8 +29,8 @@ public class Atendimento {
 		this.medico = medico;
 	}
 
-	public LocalDateTime getHoraAtendimento() {
-		return horaAtendimento;
+	public String getHoraAtendimento() {
+		return horaAtendimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
 	}
 
 	public void setHoraAtendimento(LocalDateTime horaAtendimento) {
@@ -40,10 +41,12 @@ public class Atendimento {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Atendimento [paciente: ");
 		builder.append(paciente.getNome());
+		builder.append(", hora Chegada: ");
+		builder.append(paciente.getHoraChegada());
 		builder.append(", medico: ");
 		builder.append(medico.getNome());
-		builder.append(", horaAtendimento: ");
-		builder.append(horaAtendimento);
+		builder.append(", hora Atendimento: ");
+		builder.append(getHoraAtendimento());
 		builder.append("]");
 		return builder.toString();
 	}

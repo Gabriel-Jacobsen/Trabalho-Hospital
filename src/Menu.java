@@ -1,5 +1,7 @@
 import java.awt.Component;
 import java.awt.Font;
+import java.util.Random;
+
 import javax.swing.*;
 
 
@@ -31,6 +33,7 @@ public class Menu {
 	//Menu Mostrar Pacientes
 	  JPanel menuMostrarPacientes;
 	  JTextArea listaPacientes;
+	  JScrollPane scrollPacientes;
 	  JButton voltarLista;
 	  
 	//Menu Adicionar Medico
@@ -42,6 +45,7 @@ public class Menu {
 	//Menu Mostrar Histórico
 	  JPanel menuMostrarHistorico;
 	  JTextArea listaHistorico;
+	  JScrollPane scrollHistorico;
 	  JButton voltarHisorico;
 	 
 	public static void main(String [] args) {	
@@ -49,6 +53,8 @@ public class Menu {
 		menu.fila = new Fila();
 		menu.historico = new HistoricoPacientes();
 		menu.criaJanela();
+		menu.inicializaMedicos();
+		menu.inicializaPacientes();
 	}
 	
 	public void criaJanela() {
@@ -147,17 +153,19 @@ public class Menu {
 		menuMostrarPacientes.setVisible(false);
 		
 		listaPacientes = new JTextArea();
-		listaPacientes.setBounds(0, 0, 499, 400);
 		listaPacientes.setEditable(false);
 		listaPacientes.setFont(new Font("Arial", Font.PLAIN, 9));
 		listaPacientes.setLineWrap(true); // quebra linha automática
 		listaPacientes.setWrapStyleWord(true); // quebra em palavras inteiras
+		scrollPacientes = new JScrollPane(listaPacientes);
+		scrollPacientes.setBounds(0, 0, 485, 400);
+		scrollPacientes.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		voltarLista = new JButton("Voltar");
 		voltarLista.setBounds(150, 420, 200, 30);
 		
 		menuMostrarPacientes.add(voltarLista);
-		menuMostrarPacientes.add(listaPacientes);
+		menuMostrarPacientes.add(scrollPacientes);
 		janela.add(menuMostrarPacientes);
 	}
 	
@@ -190,17 +198,19 @@ public class Menu {
 		menuMostrarHistorico.setVisible(false);
 		
 		listaHistorico = new JTextArea();
-		listaHistorico.setBounds(0, 0, 499, 400);
 		listaHistorico.setEditable(false);
 		listaHistorico.setFont(new Font("Arial", Font.PLAIN, 9));
 		listaHistorico.setLineWrap(true); // quebra linha automática
 		listaHistorico.setWrapStyleWord(true); // quebra em palavras inteiras
+		scrollHistorico = new JScrollPane(listaHistorico);
+		scrollHistorico.setBounds(0, 0, 485, 400);
+		scrollHistorico.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		voltarHisorico = new JButton("Voltar");
 		voltarHisorico.setBounds(150, 420, 200, 30);
 		
 		menuMostrarHistorico.add(voltarHisorico);
-		menuMostrarHistorico.add(listaHistorico);
+		menuMostrarHistorico.add(scrollHistorico);
 		janela.add(menuMostrarHistorico);
 	}
 	
@@ -308,9 +318,54 @@ public class Menu {
 	}
 	
 	private void inicializaPacientes() {
-		// a fazer
+		for (int i=0;i<20;i++) {
+			Random rand = new Random();
+			Paciente.cor classificacao;
+			switch (rand.nextInt(4)) {
+				case 0 : classificacao = Paciente.cor.Vermelho;break;
+				case 1 : classificacao = Paciente.cor.Amarelo;break;
+				case 2 : classificacao = Paciente.cor.Verde;break;
+				default: classificacao = Paciente.cor.Azul;break;
+			}
+			Paciente paci = new Paciente(nomeAleatorio(),classificacao);
+			fila.adicionar(paci);
+		}
 	}
+	
 	private void inicializaMedicos() {
-		// a fazer
+		for (int i=0;i<5;i++) {
+			Medico medico = new Medico(nomeAleatorio());
+			listaMedicos.addItem(medico);
+		}
+	}
+	
+	private String nomeAleatorio() {
+		Random rand = new Random();
+		String nome, sobrenome;
+		switch (rand.nextInt(10)){
+			case 0: nome = "Tim"; break;
+			case 1: nome = "Rodrigo"; break;
+			case 2: nome = "João"; break;
+			case 3: nome = "Maria"; break;
+			case 4: nome = "Fernanda"; break;
+			case 5: nome = "Rogério"; break;
+			case 6: nome = "Carlinhos"; break;
+			case 7: nome = "Roberto"; break;
+			case 8: nome = "Paul"; break;
+			default: nome = "John"; break;
+		}
+		switch (rand.nextInt(10)){
+		case 0: sobrenome = "Maia"; break;
+		case 1: sobrenome = "Costa"; break;
+		case 2: sobrenome = "Nunes"; break;
+		case 3: sobrenome = "Pereira"; break;
+		case 4: sobrenome = "da Rosa"; break;
+		case 5: sobrenome = "Ceni"; break;
+		case 6: sobrenome = "Drummond"; break;
+		case 7: sobrenome = "Carlos"; break;
+		case 8: sobrenome = "McCartney"; break;
+		default: sobrenome = "Lennon"; break;
+		}
+		return nome+" "+sobrenome;
 	}
 }
