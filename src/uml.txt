@@ -1,92 +1,185 @@
 @startuml
 
 class Atendimento {
+
 - Paciente: Paciente
+
 - Medico: medico
+
 - horaAtendimento: LocalDateTime
 
+
+
 + Atendimento(Paciente: paciente, Medico: medico)
+
 + getPaciente()
+
 + setPaciente()
+
 + getMedico()
+
 + setMedico()
+
 + getHoraAtendimento()
+
 + setHoraAtendimento()
+
 + toString()
+
 }
+
+
 
 class Fila {
+
 - pacientes : Paciente[]
 
+
+
 + getPaciente()
+
 + setPaciente()
+
 + andarFila()
+
 + adicionar(Paciente: Paciente)
+
 + exibirFila()
+
 }
+
+
 
 class HistoricoPaciente {
-- Atendimentos: historico[]
+
+- Atendimentos: histórico[]
+
+
 
 + adicionar(atend: Atendimento)
-+ exibirHistorixo() 
+
++ exibirHistorico() 
+
 }
+
+
 
 class Medico {
+
 - IdMedico: int
 
+
+
 + getIdMedico()
-+ setIdMedixo()
+
++ setIdMedico()
+
 + toString
+
 }
+
+
 
 class Paciente{
+
 - IdPaciente: int
+
 + cor: Status
+
 - horaChegada: LocalDateTime
 
+
+
 + setIdPaciente()
+
 + getHoraChegada()
+
 + setHoraChegada()
+
 + getClassificacao()
+
 + setClassificacao()
+
 + toString()
 
+
+
 }
+
+
 
 class Menu {
+
 + criarJanela()
+
 - setMenus()
+
 - menuInserirPaciente()
+
 - menuMostrarPaciente()
+
 - menuAdicionarMedico()
+
 - menuMostrarHistorico()
+
 - menuAcoesBotao()
+
 - inicializaPacientes()
+
 - inicializaMedicos()
+
 - nomeAleatorio()
+
 }
+
+
 
 class Pessoa {
+
 - Nome: String
 
+
+
 + getNome()
+
 + setNome()
+
 + toString()
+
 }
+
+
 
 enum Status {
+
 Amarelo
+
 Azul
+
 Verde
+
 Vermelho
+
 }
 
+
+
 Atendimento *-- Paciente
+
 Atendimento *-- Medico
-Fila *-- Paciente
-Pessoa <-- Paciente
+
+Fila *-- Atendimento
+
+Pessoa <|-- Paciente
+
 Pessoa <-- Medico
-Paciente --* cor
+
+Status <-- Paciente
+
+
+
+Fila *-- Menu
+
+Fila *-- HistoricoPaciente
 
 @enduml
